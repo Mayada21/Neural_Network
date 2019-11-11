@@ -1,0 +1,15 @@
+import numpy as np
+import tensorflow as tf
+
+N,D,H=64,1000,100
+model=tf.keras.Sequential()
+model.add(tf.keras.layers.Dense(H,input_shape=(D,),activation=tf.nn.relu))
+model.add(tf.keras.layers.Dense(D))
+
+model.compile(loss=tf.keras.losses.mean_squared_error,
+             optimizer=tf.keras.optimizers.SGD(lr=1e0))
+x=np.random.randn(N,D)
+y=np.random.randn(N,D)
+
+history=model.fit(x,y,epochs=1000,batch_size=N)
+print(history) 
